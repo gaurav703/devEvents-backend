@@ -11,10 +11,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://gauravkamble704:doyx9WXdnScAj5w0@deveventdatabase.q3u1eea.mongodb.net/?retryWrites=true&w=majority&appName=DevEventdatabase",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
@@ -30,13 +33,13 @@ app.use("/api/users", userRoutes);
 // app.use("/api/orders", orderRoutes);
 // app.use("/api/categories", categoryRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 
 app.get("/", (req, res) => {
   res.send("Welcome to the backend of the DevMeets app");
 });
 
 app.listen(PORT, () => {
-  console.log("server is running on port 3000");
-  console.log("http://localhost:3000");
+  console.log("server is running on port 5000");
+  console.log("http://localhost:5000");
 });
