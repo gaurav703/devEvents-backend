@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 
 router.get("/", getAllEvents);
-router.post("/", createEvent);
+// router.post("/", createEvent);
 router.get("/:id", getEventById);
 router.put("/:id", updateEvent);
 router.delete("/:id", deleteEvent);

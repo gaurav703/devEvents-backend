@@ -3,6 +3,10 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const { storage } = require("./storage/storage");
+const multer = require("multer");
+const upload = multer({ storage });
+const Event = require("./model/Event");
 
 dotenv.config();
 
@@ -31,7 +35,50 @@ const userRoutes = require("./routes/userRoutes");
 app.use("/api/events", eventRoutes);
 app.use("/api/users", userRoutes);
 // app.use("/api/orders", orderRoutes);
-// app.use("/api/categories", categoryRoutes);
+// app.use("/api/categories", categoryRoutes
+
+// creating a route for event
+app.post("/api/events/", upload.single("image"), async (req, res) => {
+  try {
+    console.log("req.files===", req.files);
+    console.log("req.file===", req.file.path);
+    const result = req.file.path;
+    console.log("result=====", result);
+    // Handle user registration
+    const {
+      title,
+      description,
+      location,
+      startDateTime,
+      endDateTime,
+      price,
+      isFree,
+      url,
+      categrory,
+      organizer,
+    } = req.body;
+    console.log("reqbody==", req.body);
+
+    const event = new Event({
+      title: title,
+      description: description,
+      location: location,
+      imageUrl: result,
+      startDateTime: startDateTime,
+      endDateTime: endDateTime,
+      price: price,
+      isFree: isFree,
+      url: url,
+      categrory: categrory,
+      organizer: organizer,
+    });
+    await event.save();
+    res.status(201).send(event);
+  } catch (err) {
+    res.status(400).send(err);
+    console.log("er", err);
+  }
+});
 
 const PORT = 5000;
 
