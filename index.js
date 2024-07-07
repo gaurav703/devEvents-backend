@@ -52,12 +52,12 @@ app.post("/api/events/", upload.single("image"), async (req, res) => {
       startDateTime,
       endDateTime,
       price,
-      isFree,
       url,
       categrory,
       organizer,
     } = req.body;
     console.log("reqbody==", req.body);
+    const isFree = req.body.isFree === "true" ? true : false;
 
     const event = new Event({
       title: title,
