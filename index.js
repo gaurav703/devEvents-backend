@@ -29,13 +29,13 @@ mongoose
 const eventRoutes = require("./routes/eventRoutes");
 const userRoutes = require("./routes/userRoutes");
 // const orderRoutes = require("./routes/orderRoutes");
-// const categoryRoutes = require("./routes/categoryRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
 
 // Use routes
 app.use("/api/events", eventRoutes);
 app.use("/api/users", userRoutes);
 // app.use("/api/orders", orderRoutes);
-// app.use("/api/categories", categoryRoutes
+app.use("/api/categories", categoryRoutes);
 
 // creating a route for event
 app.post("/api/events/", upload.single("image"), async (req, res) => {
