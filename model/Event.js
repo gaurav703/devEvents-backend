@@ -12,7 +12,7 @@ const EventSchema = new mongoose.Schema({
   price: { type: String },
   isFree: { type: Boolean, default: false },
   url: { type: String },
-  category: { type: Schema.Types.ObjectId, ref: "Category" },
+  categoryId: { type: Schema.Types.ObjectId, ref: "Category" },
   organizer: { type: Schema.Types.ObjectId, ref: "User" },
 });
 

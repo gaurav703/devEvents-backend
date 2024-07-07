@@ -53,7 +53,7 @@ app.post("/api/events/", upload.single("image"), async (req, res) => {
       endDateTime,
       price,
       url,
-      categrory,
+      categoryId,
       organizer,
     } = req.body;
     console.log("reqbody==", req.body);
@@ -69,9 +69,11 @@ app.post("/api/events/", upload.single("image"), async (req, res) => {
       price: price,
       isFree: isFree,
       url: url,
-      categrory: categrory,
+      categoryId: categoryId,
       organizer: organizer,
     });
+
+    console.log("event==", event);
     await event.save();
     res.status(201).send(event);
   } catch (err) {
