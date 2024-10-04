@@ -7,7 +7,9 @@ const UserSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   password: { type: String, required: true },
-  photo: { type: String, required: true },
+  event: [
+    { type: Schema.Types.ObjectId, ref: "Event", required: false, default: [] },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

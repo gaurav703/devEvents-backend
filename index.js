@@ -7,6 +7,7 @@ const { storage } = require("./storage/storage");
 const multer = require("multer");
 const upload = multer({ storage });
 const Event = require("./model/Event");
+const User = require("./model/User");
 
 dotenv.config();
 
@@ -75,6 +76,14 @@ app.post("/api/events/", upload.single("image"), async (req, res) => {
 
     console.log("event==", event);
     await event.save();
+
+    const user = await User.findById(organizer);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    user.event.push(event._id); // Add event ID to user's event array
+    await user.save();
     res.status(201).send(event);
   } catch (err) {
     res.status(400).send(err);

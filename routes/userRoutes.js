@@ -7,5 +7,6 @@ router.post("/signup", userContoller.signup);
 router.post("/login", userContoller.login);
 router.post("/requireAuth", userContoller.requireAuth);
 router.get("/", userContoller.getAllUsers);
+router.get("/:id", userContoller.getUserById);
 
 module.exports = router;

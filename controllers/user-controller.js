@@ -41,7 +41,7 @@ const validateSignupData = async (req, res) => {
 // Signup controller
 const signup = async (req, res) => {
   try {
-    const { username, password, email, photo, firstName, lastName } = req.body;
+    const { username, password, email, firstName, lastName } = req.body;
 
     // Validate Inputs
     const isValid = await validateSignupData(req, res);
@@ -62,7 +62,6 @@ const signup = async (req, res) => {
           email,
           username,
           password: hashedPassword,
-          photo,
           firstName,
           lastName,
         });
@@ -146,9 +145,20 @@ const getAllUsers = async (req, res) => {
   }
 };
 
+// get user by id
+const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   signup,
   login,
   requireAuth,
   getAllUsers,
+  getUserById,
 };
